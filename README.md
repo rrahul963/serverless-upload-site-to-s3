@@ -19,5 +19,8 @@ plugins:
 ```yaml
 custom:
   client:
-    bucketName: [unique-s3-bucketname]
+    bucketName: s3-bucketname
+    distributionFolder: relative path to folder to be uploaded
 ```
+
+This plugin is inspired from [serverless-finch](https://github.com/fernando-mc/serverless-finch)

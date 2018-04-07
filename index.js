@@ -68,17 +68,23 @@ class UploadSiteToS3 {
     const Utils = this.serverless.utils;
     const Error = this.serverless.classes.Error;
 
-    const distributionFolder = _.get(this.serverless, 'service.custom.client.distributionFolder', path.join('client', 'dist'));
-    const clientPath = path.join(this.serverless.config.servicePath, distributionFolder);
-    
-    if (!Utils.dirExistsSync(clientPath)) {
-      return BbPromise.reject(new Error('Could not find ' + clientPath + ' folder in your project root.'));
-    }
-
     if (!this.serverless.service.custom ||
         !this.serverless.service.custom.client ||
         !this.serverless.service.custom.client.bucketName) {
       return BbPromise.reject(new Error('Please specify a bucket name for the client in serverless.yml.'));
+    }
+
+    if (!this.serverless.service.custom ||
+      !this.serverless.service.custom.client ||
+      !this.serverless.service.custom.client.distributionFolder) {
+      return BbPromise.reject(new Error('Please specify a distribution folder for the client in serverless.yml.'));
+    }
+
+    const distributionFolder = this.serverless.service.custom.client.distributionFolder;
+    const clientPath = path.join(this.serverless.config.servicePath, distributionFolder);
+    
+    if (!Utils.dirExistsSync(clientPath)) {
+      return BbPromise.reject(new Error('Could not find ' + clientPath + ' folder in your project root.'));
     }
 
     this.bucketName = this.serverless.service.custom.client.bucketName;
