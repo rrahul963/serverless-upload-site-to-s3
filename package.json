@@ -1,0 +1,24 @@
+{
+  "name": "serverless-upload-site-to-s3",
+  "version": "1.0.0",
+  "description": "serverless plugin to upload files to s3",
+  "main": "index.js",
+  "keywords": [
+    "serverless",
+    "s3",
+    "website",
+    "static"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrahul963/serverless-upload-site-to-s3.git"
+  },
+  "author": "rahul.tulsian87@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.5",
+    "mime": "^2.2.2"
+  }
+}
