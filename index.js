@@ -94,13 +94,19 @@ class UploadSiteToS3 {
   }
 
   _clearAndUploadFilesToS3() {
-    this.serverless.cli.log('Deploying client to stage "' + this.stage + '" in region "' + this.region + '"...');
+    this.serverless.cli.log('Deploying files to stage "' + this.stage + '" in region "' + this.region + '"...');
     return this.listObjectsInBucket()
       .then((data) => {
         return this.deleteObjectsFromBucket(data);
       })
       .then(() => {
         return this._uploadDirectory(this.clientPath);
+      })
+      .then(() => {
+        this.serverless.cli.log('Completed uploading files to s3.')
+      })
+      .catch(error => {
+        this.serverless.cli.log(`Failed to upload files to s3. Error: ${error.message}`);
       });
   }
 
