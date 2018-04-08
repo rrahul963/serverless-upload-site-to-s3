@@ -102,9 +102,6 @@ class UploadSiteToS3 {
       .then(() => {
         return this._uploadDirectory(this.clientPath);
       })
-      .then(() => {
-        this.serverless.cli.log('Completed uploading files to s3.')
-      })
       .catch(error => {
         this.serverless.cli.log(`Failed to upload files to s3. Error: ${error.message}`);
       });
