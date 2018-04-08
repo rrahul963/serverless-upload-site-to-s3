@@ -31,7 +31,7 @@ class UploadSiteToS3 {
     this.provider = 'aws';
     this.aws = this.serverless.getProvider(this.provider);
     this.hooks = {
-      'before:deploy:deploy': () => {
+      'after:deploy:deploy': () => {
         this.stage = _.get(serverless, 'service.provider.stage')
         this.region = _.get(serverless, 'service.provider.region');
         this._validate()
@@ -134,7 +134,7 @@ class UploadSiteToS3 {
         Bucket: _this.bucketName,
         Key: fileKey,
         Body: fileBuffer,
-        ContentType: mime.lookup(filePath)
+        ContentType: mime.getType(filePath)
       };
       return _this.aws.request('S3', 'putObject', params, _this.stage, _this.region);
     });
