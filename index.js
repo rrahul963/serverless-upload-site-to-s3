@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
+const mime = require('mime');
 const path = require('path');
 const recursive = require("recursive-readdir");
 
@@ -70,7 +71,7 @@ const uploadFilesToS3 =
       const fileBody = fs.readFileSync(filePath);
       const distributionFolder = serverless.service.custom.client.distributionFolder;
       const fileKey = filePath.replace(`${serverless.config.servicePath}/${distributionFolder}/`, '');
-      return s3.upload({ Body: fileBody, Bucket: bucketName, Key: fileKey }).promise();
+      return s3.putObject({ Body: fileBody, Bucket: bucketName, Key: fileKey, ContentType: mime.getType(filePath) }).promise();
     }));
   }
 
