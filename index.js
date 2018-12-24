@@ -35,9 +35,7 @@ const validate = function validate(serverless) {
 const cleanBucket = async function cleanBucket(serverless, bucketName, creds, region) {
   const s3 = new AWS.S3({
     region,
-    accessKeyId: creds.credentials.accessKeyId,
-    secretAccessKey: creds.credentials.secretAccessKey,
-    sessionToken: creds.credentials.sessionToken
+    credentials: creds.credentials
   });
   let nextMarker = undefined;
   let isTruncated = true;
@@ -63,9 +61,7 @@ const uploadFilesToS3 =
     const filesPath = await recursive(clientPath);
     const s3 = new AWS.S3({
       region,
-      accessKeyId: creds.credentials.accessKeyId,
-      secretAccessKey: creds.credentials.secretAccessKey,
-      sessionToken: creds.credentials.sessionToken
+      credentials: creds.credentials
     });
     await Promise.all(filesPath.map(filePath => {
       const fileBody = fs.readFileSync(filePath);

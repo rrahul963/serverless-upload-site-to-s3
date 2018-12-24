@@ -1,6 +1,6 @@
 {
   "name": "serverless-upload-site-to-s3",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "serverless plugin to upload files to s3",
   "main": "index.js",
   "keywords": [
